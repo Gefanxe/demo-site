@@ -42,4 +42,14 @@ class Home extends BaseController
 
       return view('test/test', $data);
     }
+
+    public function csrfform()
+    {
+      return view('test/csrfform');
+    }
+
+    public function okform()
+    {
+      echo 'ok';
+    }
 }
