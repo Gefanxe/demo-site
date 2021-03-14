@@ -1,7 +1,10 @@
 <?php $this->extend('layout/default'); ?>
 
-<?php $this->section('content'); ?>
+<?php $this->section('head'); ?>
 
+<?php $this->endSection(); ?>
+
+<?php $this->section('content'); ?>
     
     <section class="flexslider">
       <ul class="slides">
