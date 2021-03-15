@@ -34,4 +34,50 @@ class Home extends BaseController
       return view('pages/contact');
     }
 
+    public function toLogin()
+    {
+      $result = [
+        'result' => false,
+        'errMsg' => ''
+      ];
+
+      $method = $this->request->getMethod();
+        
+      if (!$this->request->isAJAX()) die('bad request ajax');
+      if ($method != 'post') die('bad request');
+
+      $postData = $this->request->getJSON();
+
+      $user = new \App\Entities\User();
+
+      if ($user->doLogin($postData->email, $postData->password)) {
+        $result['result'] = true;
+      } else {
+        $result['errMsg'] = '登入失敗....';
+      }
+
+      return $this->response->setJSON($result);
+    }
+
+    public function toRegister()
+    {
+      $result = [
+        'result' => false,
+        'errMsg' => ''
+      ];
+
+      $method = $this->request->getMethod();
+        
+      if (!$this->request->isAJAX()) die('bad request ajax');
+      if ($method != 'post') die('bad request');
+
+      $postData = $this->request->getJSON();
+
+      $user = new \App\Entities\User();
+
+      $doRegist = $user->doRegister((array)$postData);
+      
+      return $this->response->setJSON($result);
+    }
+
 }

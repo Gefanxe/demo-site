@@ -6,6 +6,7 @@ use CodeIgniter\Config\BaseConfig;
 use CodeIgniter\Filters\CSRF;
 use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
+use CodeIgniter\App\Filters\Options;
 
 class Filters extends BaseConfig
 {
@@ -19,6 +20,7 @@ class Filters extends BaseConfig
 		'csrf'     => CSRF::class,
 		'toolbar'  => DebugToolbar::class,
 		'honeypot' => Honeypot::class,
+		'options' => Options::class,
 	];
 
 	/**
@@ -29,11 +31,12 @@ class Filters extends BaseConfig
 	 */
 	public $globals = [
 		'before' => [
+			// 'options'
 			// 'honeypot',
-			'csrf',
+			// 'csrf',
 		],
 		'after'  => [
-			'toolbar',
+			// 'toolbar',
 			// 'honeypot',
 		],
 	];
@@ -58,5 +61,12 @@ class Filters extends BaseConfig
 	 *
 	 * @var array
 	 */
-	public $filters = [];
+	public $filters = [
+		'options' => [
+			'before' => [
+				'rest',
+				'rest/*'
+			]
+		]
+	];
 }

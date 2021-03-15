@@ -8,15 +8,16 @@ class UserModel extends Model
     protected $primaryKey = 'id';
 
     protected $returnType = 'App\Entities\User';
+
     protected $useSoftDeletes = true;
+    protected $deletedField  = 'deleted_at';
 
     // 准許進事件的key(跟資料庫欄位無關)
     protected $allowedFields = ['email', 'password'];
 
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
 
     protected $validationRules = [
         'email' => 'required|valid_email|is_unique[mng_users.email]',
@@ -41,4 +42,5 @@ class UserModel extends Model
     }
 
     protected $beforeInsert = ['hashPassword'];
+
 }

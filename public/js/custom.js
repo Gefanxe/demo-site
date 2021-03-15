@@ -218,24 +218,27 @@
 
   };
 
+  var activeMenuSelect = function() {
+    let currentUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    let menu = $('#navbar-collapse li:has(> a[href^="/"])');
+    menu.each(function(index, item) {
+      if (item.children[0].href == currentUrl) {
+        item.className = "active";
+      }
+    });
+  };
+
   jQuery(function () {
     menuHover();
     showcase();
     contentWayPoint();
     navbarState();
+    activeMenuSelect();
   });
 
   jQuery(window).load(function () {
     owlCarousel();
     flexSlider();
-  });
-
-  let currentUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
-  let menu = $('#navbar-collapse li:has(> a[href^="/"])');
-  menu.each(function(index, item) {
-    if (item.children[0].href == currentUrl) {
-      item.className = "active";
-    }
   });
   
 })();

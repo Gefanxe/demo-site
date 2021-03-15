@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/css/styles-merged.css">
     <link rel="stylesheet" href="/css/style.min.css">
 
+    <script src="/js/scripts.min.js"></script>
+    <script src="/js/custom.js"></script>
+    
     <!--[if lt IE 9]>
       <script src="js/vendor/html5shiv.min.js"></script>
       <script src="js/vendor/respond.min.js"></script>
@@ -34,9 +37,6 @@
     <!-- Modal signup -->
     <?php echo $this->include('component/signup'); ?>
     <!-- END modal signup -->
-
-    <script src="/js/scripts.min.js"></script>
-    <script src="/js/custom.js"></script>
 
   </body>
 </html>

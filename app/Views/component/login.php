@@ -7,12 +7,12 @@
             <div class="probootstrap-modal-flex">
               <div class="probootstrap-modal-figure" style="background-image: url(/img/modal_bg.jpg);"></div>
               <div class="probootstrap-modal-content">
-                <form action="#" class="probootstrap-form">
+                <form name="loginForm" action="#" class="probootstrap-form">
                   <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input name="email" type="text" class="form-control" placeholder="Email">
                   </div> 
                   <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input name="password" type="password" class="form-control" placeholder="Password">
                   </div> 
                   <div class="form-group clearfix mb40">
                     <label for="remember" class="probootstrap-remember"><input type="checkbox" > Remember Me</label>
@@ -44,3 +44,28 @@
         </div>
       </div>
     </div>
+
+<script>
+  // login script
+  $(function() {
+    document.loginForm.onsubmit = function(evt) {
+      let frm = evt.target;
+      let formData = new FormData(frm);
+      let dataObject = Object.fromEntries(formData);
+      let jsonString = JSON.stringify(dataObject);
+
+      fetch('/home/toLogin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', "X-Requested-With": "XMLHttpRequest" },
+        body: jsonString,
+      }).then(res => {
+          return res.json();
+          // return res.text();
+      }).then(res => {
+          console.log('status:', res);
+      });
+
+      evt.preventDefault();
+    };
+  });
+</script>
