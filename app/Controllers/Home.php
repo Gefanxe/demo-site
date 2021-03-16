@@ -79,6 +79,6 @@ class Home extends BaseController
     {
       $user = new \App\Entities\User();
       $user->doLogout();
-      return redirect('/home/index');
+      return redirect('/', 'refresh'); //OR: return redirect()->to('/home/index');
     }
 }
