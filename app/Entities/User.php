@@ -55,31 +55,17 @@ class User extends Entity
   {
     $result = [
       'result' => false,
-      'errMsg' => ''
+      'errMsg' => null
     ];
 
     $this->fill($userData);
+    
+    $userModel = model('App\Models\UserModel');
 
-    // check pass confirm
-    if ($this->_checkPassConfirm()) {
-      $userModel = model('App\Models\UserModel');
-  
-      if ($userModel->save($userData) === false) {
-        $result['errMsg'] = $userModel->errors();
-      } else {
-        $result['result'] = true;
-      }
-    }
-
-    return $result;
-  }
-
-  private function _checkPassConfirm()
-  {
-    $result = false;
-
-    if ($this->password == $this->pass_confirm) {
-      $result = true;
+    if ($userModel->save($userData) === false) {
+      $result['errMsg'] = $userModel->errors();
+    } else {
+      $result['result'] = true;
     }
 
     return $result;

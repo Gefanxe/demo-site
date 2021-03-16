@@ -61,11 +61,6 @@ class Home extends BaseController
 
     public function toRegister()
     {
-      $result = [
-        'result' => false,
-        'errMsg' => ''
-      ];
-
       $method = $this->request->getMethod();
         
       if (!$this->request->isAJAX()) die('bad request ajax');
@@ -77,7 +72,7 @@ class Home extends BaseController
 
       $doRegist = $user->doRegister((array)$postData);
       
-      return $this->response->setJSON($result);
+      return $this->response->setJSON($doRegist);
     }
 
 }
