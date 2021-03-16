@@ -17,18 +17,27 @@ class User extends Entity
     'deleted_at' => null
   ];
 
-  public function __construct()
-  {
-    $session = session();
-    $user = $session->has('user') ? $session->get('user') : null;
-
-    parent::__construct($user);
-  }
+  // public function __construct()
+  // {
+  //   parent::__construct();
+  // }
 
   private function _saveToSession($user)
   {
     $session = session();
     $session->set('user', $user);
+  }
+
+  public function isLogin()
+  {
+    $session = session();
+    return $session->has('user');
+  }
+
+  public function getCurrentUser()
+  {
+    $session = session();
+    return $session->get('user');
   }
 
   public function doLogin($email, $password)
@@ -37,18 +46,27 @@ class User extends Entity
 
     $userModel = model('App\Models\UserModel');
 
+    $hash_pass = password_hash($password, PASSWORD_BCRYPT);
+    // password_verify
     $user = $userModel->where([
-      'email' => $email,
-      'password' => $password
+      'email' => $email
     ])->first();
 
-    if ($user) {
-      $this->fill((array)$user);
+    $isValid = password_verify($password, $user->password);
+
+    if ($isValid) {
       $this->_saveToSession($user);
       $result = true;
     }
 
     return $result;
+  }
+
+  public function doLogout()
+  {
+    $session = session();
+    $session->remove('user');
+    $session->destroy();
   }
 
   public function doRegister($userData)

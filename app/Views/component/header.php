@@ -1,3 +1,12 @@
+<?php
+  $user = new \App\Entities\User();
+  $isLogin = $user->isLogin();
+
+  if ($isLogin) {
+    $currentUser = ($isLogin) ? $user->getCurrentUser() : null;
+    $partOfEmail = preg_replace('/(.+)@.+/', '$1', $currentUser->email);
+  }
+?>
 
     <nav class="navbar navbar-default navbar-fixed-top probootstrap-navbar">
       <div class="container">
@@ -33,9 +42,14 @@
               </ul>
             </li>
             <li><a href="/home/contact">Contact</a></li>
+<?php if (!$isLogin) : ?>
             <li class="probootstra-cta-button"><a href="#" class="btn" data-toggle="modal" data-target="#loginModal">Log in</a></li>
             <li class="probootstra-cta-button last"><a href="#" class="btn btn-ghost" data-toggle="modal" data-target="#signupModal">Sign up</a></li>
-          </ul>
+<?php else : ?>
+            <li><a class="loginName" href="#"><?php echo $partOfEmail; ?></a></li>
+            <li class="probootstra-cta-button last"><a href="/home/logout" class="btn">Logout</a></li>
+<?php endif ?>
+            </ul>
         </div>
       </div>
     </nav>

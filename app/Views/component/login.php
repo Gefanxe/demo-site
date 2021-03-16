@@ -62,7 +62,11 @@
           return res.json();
           // return res.text();
       }).then(res => {
-          console.log('status:', res);
+          if (res.result) {
+            location.reload();
+          } else {
+            alert(res.errMsg);
+          }
       });
 
       evt.preventDefault();

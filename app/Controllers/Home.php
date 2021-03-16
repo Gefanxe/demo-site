@@ -53,7 +53,7 @@ class Home extends BaseController
       if ($user->doLogin($postData->email, $postData->password)) {
         $result['result'] = true;
       } else {
-        $result['errMsg'] = '登入失敗....';
+        $result['errMsg'] = '登入失敗,請確認帳戶及密碼是否正確';
       }
 
       return $this->response->setJSON($result);
@@ -71,8 +71,14 @@ class Home extends BaseController
       $user = new \App\Entities\User();
 
       $doRegist = $user->doRegister((array)$postData);
-      
+
       return $this->response->setJSON($doRegist);
     }
 
+    public function logout()
+    {
+      $user = new \App\Entities\User();
+      $user->doLogout();
+      return redirect('/home/index');
+    }
 }
