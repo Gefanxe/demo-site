@@ -63,10 +63,16 @@
         headers: { 'Content-Type': 'application/json', "X-Requested-With": "XMLHttpRequest" },
         body: jsonString,
       }).then(res => {
-          // return res.json();
-          return res.text();
+          return res.json();
       }).then(res => {
-          console.log('status:', res);
+          if (res.result) {
+            alert('註冊成功');
+            location.reload();
+            // $('#signupModal').modal('hide');
+          } else {
+            let msg = Object.values(res.errMsg).join('\n');
+            alert(msg);
+          }
       });
 
       evt.preventDefault();

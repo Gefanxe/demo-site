@@ -30,7 +30,7 @@ class UserModel extends Model
   protected $validationMessages = [
     'email' => [
       'is_unique' => 'Email不能重複哦',
-      'valid_email' => '不是合法Email',
+      'valid_email' => 'Email不合法',
       'required' => 'Email不能為空'
     ],
     'password' => [
