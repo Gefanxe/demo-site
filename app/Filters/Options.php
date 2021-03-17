@@ -17,9 +17,9 @@ Class Options implements FilterInterface
         // error_log(print_r('method: '. $method, TRUE));
         
         // 略過 OPTIONS
-        if ($method == "OPTIONS") {
-            die();
-        }
+//        if ($method == "OPTIONS") {
+//            die();
+//        }
     }
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
